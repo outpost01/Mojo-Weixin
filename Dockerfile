@@ -1,5 +1,4 @@
-FROM centos:7.0.1406
-MAINTAINER sjdy521 <sjdy521@163.com>
+FROM centos:latest
 WORKDIR /root
 USER root
 ENV TZ=Asia/Shanghai
