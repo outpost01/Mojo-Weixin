@@ -21,4 +21,4 @@ RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/master.zip -OMojo-Wei
     && cpanm -v . \
     && cd .. \
     && rm -rf Mojo-Weixin-master Mojo-Weixin.zip
-CMD perl -MMojo::Weixin -e 'Mojo::Weixin->new(log_encoding=>"utf8")->load(["ShowMsg"])->load("Mipush",data=>{registration_ids=>["$ENV{MOJO_WEIXIN_REG_ID}"]})->run'
+CMD perl -MMojo::Weixin -e 'Mojo::Weixin->new(log_encoding=>"utf8")->load(["ShowMsg"])->load("Mipush",data=>{registration_ids=>["$ENV{MOJO_WEIXIN_REG_ID}"]})->load("Openwx",data=>{listen=>[{port=>$ENV{MOJO_WEIXIN_PLUGIN_OPENWX_PORT}//3000}, ]}->run'
