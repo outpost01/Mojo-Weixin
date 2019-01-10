@@ -20,8 +20,7 @@ RUN yum -y --nogpgcheck install \
     perl-Time-HiRes \
     perl-IO-Socket-SSL \
     perl-Encode-Locale \
-    perl-Term-ANSIColor && \
-    yum clean all
+    perl-Term-ANSIColor
 RUN cpanm -vn Test::More IO::Socket::SSL Mojolicious
 RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/master.zip -OMojo-Weixin.zip \
     && unzip -qo Mojo-Weixin.zip \
