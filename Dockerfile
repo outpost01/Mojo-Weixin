@@ -4,6 +4,7 @@ WORKDIR /root
 USER root
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN yum -y update
 RUN yum -y --nogpgcheck install \
     make \
     unzip \ 
@@ -20,7 +21,8 @@ RUN yum -y --nogpgcheck install \
     perl-Time-HiRes \
     perl-IO-Socket-SSL \
     perl-Encode-Locale \
-    perl-Term-ANSIColor
+    perl-Term-ANSIColor && \
+    yum clean all
 RUN cpanm -vn Test::More IO::Socket::SSL Mojolicious
 RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/master.zip -OMojo-Weixin.zip \
     && unzip -qo Mojo-Weixin.zip \
