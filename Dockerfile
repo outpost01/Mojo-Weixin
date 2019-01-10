@@ -1,9 +1,10 @@
-FROM centos:latest
+FROM ubuntu:latest
 WORKDIR /root
 USER root
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN yum -y --nogpgcheck install \
+RUN apt-get update
+RUN apt-get install -y \
 	    make \
 	    unzip \ 
 	    wget \ 
@@ -20,7 +21,7 @@ RUN yum -y --nogpgcheck install \
 	    perl-IO-Socket-SSL \
 	    perl-Encode-Locale \
 	    perl-Term-ANSIColor && \
-	    yum clean all
+	    apt-get clean
 RUN cpanm -vn Test::More IO::Socket::SSL Mojolicious
 RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/master.zip -OMojo-Weixin.zip \
     && unzip -qo Mojo-Weixin.zip \
