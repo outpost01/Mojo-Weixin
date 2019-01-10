@@ -1,26 +1,26 @@
-FROM ubuntu:latest
+FROM centos:latest
 WORKDIR /root
 USER root
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN apt-get install -y \
-    make \
-    unzip \ 
-    wget \ 
-    tar \
-    perl \ 
-    perl-App-cpanminus \
-    perl-Compress-Raw-Zlib \
-    perl-IO-Compress-Gzip \
-    perl-Digest-MD5 \
-    perl-Digest-SHA \
-    perl-Time-Piece \
-    perl-Time-Seconds \
-    perl-Time-HiRes \
-    perl-IO-Socket-SSL \
-    perl-Encode-Locale \
-    perl-Term-ANSIColor && \
-    apt-get clean
+RUN yum -y --nogpgcheck install \
+	    make \
+	    unzip \ 
+	    wget \ 
+	    tar \
+	    perl \ 
+	    perl-App-cpanminus \
+	    perl-Compress-Raw-Zlib \
+	    perl-IO-Compress-Gzip \
+	    perl-Digest-MD5 \
+	    perl-Digest-SHA \
+	    perl-Time-Piece \
+	    perl-Time-Seconds \
+	    perl-Time-HiRes \
+	    perl-IO-Socket-SSL \
+	    perl-Encode-Locale \
+	    perl-Term-ANSIColor && \
+	    yum clean all
 RUN cpanm -vn Test::More IO::Socket::SSL Mojolicious
 RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/master.zip -OMojo-Weixin.zip \
     && unzip -qo Mojo-Weixin.zip \
