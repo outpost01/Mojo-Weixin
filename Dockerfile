@@ -4,24 +4,16 @@ WORKDIR /root
 USER root
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN yum -y update
+RUN yum -y groupinstall 'Development Tools' 
 RUN yum -y --nogpgcheck install \
     make \
+    gcc \
+    g++ \
     unzip \ 
     wget \ 
     tar \
-    perl \ 
-    perl-App-cpanminus \
-    perl-Compress-Raw-Zlib \
-    perl-IO-Compress-Gzip \
-    perl-Digest-MD5 \
-    perl-Digest-SHA \
-    perl-Time-Piece \
-    perl-Time-Seconds \
-    perl-Time-HiRes \
-    perl-IO-Socket-SSL \
-    perl-Encode-Locale \
-    perl-Term-ANSIColor && \
+    perl \
+    cpan && \
     yum clean all
 RUN cpanm -vn Test::More IO::Socket::SSL Mojolicious
 RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/master.zip -OMojo-Weixin.zip \
