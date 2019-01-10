@@ -4,7 +4,6 @@ WORKDIR /root
 USER root
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN yum -y groupinstall 'Development Tools' 
 RUN yum -y --nogpgcheck install \
     make \
     gcc \
