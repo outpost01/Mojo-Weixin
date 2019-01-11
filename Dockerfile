@@ -17,8 +17,8 @@ RUN yum -y --nogpgcheck install \
 RUN cpanm -vn Test::More IO::Socket::SSL Mojolicious
 RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/v1.4.2.zip -OMojo-Weixin.zip \
     && unzip -qo Mojo-Weixin.zip \
-    && cd Mojo-Weixin-master \
+    && cd Mojo-Weixin-1.4.2 \
     && cpanm -v . \
     && cd .. \
-    && rm -rf Mojo-Weixin-master Mojo-Weixin.zip
+    && rm -rf Mojo-Weixin-1.4.2 Mojo-Weixin.zip
 CMD perl -MMojo::Weixin -e 'Mojo::Weixin->new(log_encoding=>"utf8")->load(["ShowMsg"])->load("MiPush",data=>{registration_ids=>["$ENV{MOJO_WEIXIN_REG_ID}"],is_ban_official=>["$ENV{MOJO_WEIXIN_IS_BAN}"]})->load("Openwx",data=>{listen=>[{port=>$ENV{MOJO_WEIXIN_PLUGIN_OPENWX_PORT}}]})->run'
