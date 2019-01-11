@@ -15,7 +15,7 @@ RUN yum -y --nogpgcheck install \
     perl-App-cpanminus && \
     yum clean all
 RUN cpanm -vn Test::More IO::Socket::SSL Mojolicious
-RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/master.zip -OMojo-Weixin.zip \
+RUN wget -q https://github.com/sjdy521/Mojo-Weixin/archive/v1.4.2.zip -OMojo-Weixin.zip \
     && unzip -qo Mojo-Weixin.zip \
     && cd Mojo-Weixin-master \
     && cpanm -v . \
